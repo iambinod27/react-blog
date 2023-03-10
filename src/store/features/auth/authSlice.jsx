@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, register } from "../../actions/authActions";
+import { getUser, login, register } from "../../actions/authActions";
 
 const initialState = {
-  username: null,
-  access_token: null,
-  refresh_token: null,
+  username: "",
   isLoading: true,
+  isAuthenticated: false,
   error: null,
   success: false,
+  message: null,
 };
 
 const authSlice = createSlice({
@@ -29,16 +29,33 @@ const authSlice = createSlice({
     },
     [login.pending]: (state) => {
       state.isLoading = true;
+      state.isAuthenticated = false;
       state.error = null;
     },
     [login.fulfilled]: (state, { payload }) => {
-      console.log(payload);
       state.isLoading = false;
-      state.access_token = payload.access_token;
-      state.refresh_token = payload.refresh_token;
+      state.message = "Login successfully";
+      state.isAuthenticated = true;
     },
     [login.rejected]: (state, { payload }) => {
       state.isLoading = true;
+      state.isAuthenticated = false;
+      state.error = payload;
+    },
+    [getUser.pending]: (state) => {
+      state.isLoading = true;
+      state.isAuthenticated = false;
+      state.error = null;
+    },
+    [getUser.fulfilled]: (state, { payload }) => {
+      console.log(payload);
+      state.isLoading = false;
+      state.isAuthenticated = true;
+      state.username = payload.username;
+    },
+    [getUser.rejected]: (state, { payload }) => {
+      state.isLoading = true;
+      state.isAuthenticated = false;
       state.error = payload;
     },
   },

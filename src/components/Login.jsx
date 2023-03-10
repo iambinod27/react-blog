@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/actions/authActions";
 
 const Login = () => {
-  const { error } = useSelector((state) => state.auth);
+  const { error, message, isLoading } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
@@ -20,7 +20,8 @@ const Login = () => {
 
   return (
     <form className="form" onSubmit={formik.handleSubmit}>
-      {error}
+      {isLoading ? error : message}
+
       <div className="form-body">
         <div className="lastname">
           <label className="form__label">username</label>
