@@ -10,11 +10,12 @@ export const register = createAsyncThunk(
     try {
       const response = await blogaxios.post("/api/v1/auth/signup", payload, {
         headers: {
-          "Content-Type": "application/json",
+          "content-type": "application/json",
         },
       });
 
-      return response;
+      const data = await response.data;
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -41,6 +42,7 @@ export const login = createAsyncThunk(
 
 export const getUser = createAsyncThunk("auth/getUser", async (_, thunkAPI) => {
   try {
+    console.log(access_token);
     const response = await blogaxios.get("/api/v1/auth/me", {
       headers: {
         Authorization: `Bearer ${access_token}`,

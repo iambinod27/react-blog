@@ -19,7 +19,7 @@ const Navbar = () => {
           <h1>Blogoshpere.</h1>
         </Link>
         <div>
-          <p>{!isAuthenticated ? "Account" : `${username}`}</p>
+          <p>{isAuthenticated ? `${username}` : "Account"}</p>
           <Link to="/login">
             <p>Login</p>
           </Link>

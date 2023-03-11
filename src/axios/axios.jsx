@@ -3,7 +3,12 @@ import axios from "axios";
 import { setHttpOnlyCookies } from "../utils/setHttpOnlyCookies";
 
 const blogaxios = axios.create({
-  baseURL: "https://6bda-103-10-31-107.in.ngrok.io",
+  baseURL: "https://87b4-103-10-31-107.in.ngrok.io",
+  // headers: {
+  //   "Access-Control-Allow-Origin": "*",
+  //   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+  //   "Access-Control-Allow-Headers": "Content-Type",
+  // },
 });
 
 blogaxios.interceptors.response.use(
