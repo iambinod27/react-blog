@@ -1,9 +1,11 @@
+import { Box } from "@mui/material";
+
 const Post = () => {
   return (
-    <div>
+    <Box>
       <h1>title</h1>
       <p>contents</p>
-    </div>
+    </Box>
   );
 };
 export default Post;

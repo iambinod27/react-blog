@@ -8,39 +8,25 @@ const Navbar = () => {
 
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          height: "60px",
-          p: "0 20px",
-          bgcolor: "#000",
-        }}
-      >
+      <div>
         <Link to="/" style={{ textDecoration: "none" }}>
-          <Typography
-            variant="h5"
-            sx={{ fontWeight: "bold", textDecoration: "none", color: "white" }}
-          >
-            Blogoshpere.
-          </Typography>
+          <h3>Blogoshpere.</h3>
         </Link>
-        <Box sx={{ display: "flex", gap: "10px" }}>
+        <div>
           {isAuthenticated ? (
             <p>`${username}`</p>
           ) : (
             <>
               <Link to="/login">
-                <Button variant="outlined">Login</Button>
+                <button>Login</button>
               </Link>
               <Link to="/signup">
-                <Button variant="contained">Sign Up</Button>
+                <button>Sign Up</button>
               </Link>
             </>
           )}
-        </Box>
-      </Box>
+        </div>
+      </div>
     </>
   );
 };
