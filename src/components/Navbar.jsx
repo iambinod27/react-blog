@@ -1,3 +1,5 @@
+// import { Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -6,26 +8,23 @@ const Navbar = () => {
 
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          height: "70px",
-          padding: "0 20px",
-        }}
-      >
-        <Link to="/">
-          <h1>Blogoshpere.</h1>
+      <div>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <h3>Blogoshpere.</h3>
         </Link>
         <div>
-          <p>{!isAuthenticated ? "Account" : `${username}`}</p>
-          <Link to="/login">
-            <p>Login</p>
-          </Link>
-          <Link to="/signup">
-            <p>Signup</p>
-          </Link>
+          {isAuthenticated ? (
+            <p>`${username}`</p>
+          ) : (
+            <>
+              <Link to="/login">
+                <button>Login</button>
+              </Link>
+              <Link to="/signup">
+                <button>Sign Up</button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </>
