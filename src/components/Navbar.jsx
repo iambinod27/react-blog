@@ -1,3 +1,4 @@
+// import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -21,7 +22,7 @@ const Navbar = () => {
         <div>
           <p>{isAuthenticated ? `${username}` : "Account"}</p>
           <Link to="/login">
-            <p>Login</p>
+            {/* <Button variant="outlined">Login</Button> */}
           </Link>
           <Link to="/signup">
             <p>Signup</p>

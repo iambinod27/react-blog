@@ -19,7 +19,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (!isAuthenticated) {
       dispatch(getUser());
     }
   }, [access_token]);
