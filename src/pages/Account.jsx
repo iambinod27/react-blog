@@ -1,7 +1,5 @@
-import { Alert, Box, Button, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { register } from "../store/actions/authActions";
 
 const Account = () => {
@@ -26,96 +24,79 @@ const Account = () => {
 
   return (
     <form className="form" onSubmit={formik.handleSubmit}>
-      <Box sx={{ width: "41%", m: "20px auto" }}>
-        <Typography variant="h4" sx={{ mb: 2 }}>
-          Let's get your account set up
-        </Typography>
+      <div>
+        <h4>Let's get your account set up</h4>
 
-        <Box sx={{ mb: 2 }}>
-          <Alert
-            icon={false}
-            severity="warning"
-            sx={` ${error ? "display : block," : "display : none"} `}
-          >
-            {error}
-          </Alert>
-        </Box>
-        <Box sx={{ pb: 2 }} display={"flex"} justifyContent={"space-between"}>
-          <TextField
-            label="First Name"
-            type="text"
-            id="filled-hidden-label-small"
-            placeholder="First Name"
-            name="first_name"
-            value={formik.values.first_name}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-
-          <TextField
-            label="Last Name"
-            type="text"
-            id="filled-hidden-label-small"
-            placeholder="lastname"
-            name="last_name"
-            value={formik.values.last_name}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-        </Box>
-
-        <Box sx={{ pb: 2 }}>
-          <TextField
-            label="Email Address"
-            type="email"
-            id="email"
-            fullWidth
-            placeholder="Email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-        </Box>
-        <Box sx={{ pb: 2 }}>
-          <TextField
-            fullWidth
-            label="Username"
-            type="text"
-            name="username"
-            id="username"
-            placeholder="Username"
-            value={formik.values.username}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-        </Box>
-
-        <Box sx={{ pb: 2 }}>
-          <TextField
-            label="Password"
-            type="password"
-            fullWidth
-            id="password"
-            placeholder="Password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-        </Box>
-        <Button
-          variant="contained"
-          sx={{ borderRadius: 0, mb: 2 }}
-          type="submit"
-          fullWidth
-        >
-          Register
-        </Button>
-        <Box display={"flex"} justifyContent={"space-between"}>
-          <Link to="/login" style={{ textDecoration: "none", color: "black" }}>
-            Already Have an Account?
-          </Link>
-        </Box>
-      </Box>
+        <div>{error}</div>
+        <div className="form-body">
+          <div className="username">
+            <label className="form__label">First Name</label>
+            <input
+              className="form__input"
+              type="text"
+              placeholder="First Name"
+              name="first_name"
+              value={formik.values.first_name}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+          </div>
+          <div className="lastname">
+            <label className="form__label">Last Name</label>
+            <input
+              type="text"
+              className="form__input"
+              placeholder="lastname"
+              name="last_name"
+              value={formik.values.last_name}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+          </div>
+          <div className="lastname">
+            <label className="form__label">username</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              className="form__input"
+              placeholder="username"
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+          </div>
+          <div className="email">
+            <label className="form__label">Email </label>
+            <input
+              type="email"
+              id="email"
+              className="form__input"
+              placeholder="Email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+          </div>
+          <div className="password">
+            <label className="form__label">Password </label>
+            <input
+              className="form__input"
+              type="password"
+              id="password"
+              placeholder="Password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+          </div>
+        </div>
+        <div className="footer">
+          <button type="submit" className="btn">
+            Register
+          </button>
+        </div>
+      </div>
     </form>
   );
 };
