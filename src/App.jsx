@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import Layout from "./components/Layout";
 import Account from "./pages/Account";
-import { getUser } from "./store/actions/authActions";
+import { checkUser, getUser } from "./store/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { getHttpOnlyCookies } from "./utils/getHttpOnlyCookies";
 import Home from "./pages/Home";
@@ -19,9 +19,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      dispatch(getUser());
-    }
+    // dispatch(checkUser());
   }, [access_token]);
   return (
     <div className="App">

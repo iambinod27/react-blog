@@ -1,3 +1,4 @@
+import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../store/actions/authActions";
@@ -18,86 +19,114 @@ const Account = () => {
 
     onSubmit: (values) => {
       dispatch(register(values));
-      console.log(values);
     },
   });
 
   return (
-    <form className="form" onSubmit={formik.handleSubmit}>
-      <div>
-        <h4>Let's get your account set up</h4>
+    <>
+      <div className="w-96 mx-auto">
+        <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
+          <h4 className="text-3xl font-medium">
+            Let's get your account set up
+          </h4>
 
-        <div>{error}</div>
-        <div className="form-body">
-          <div className="username">
-            <label className="form__label">First Name</label>
-            <input
-              className="form__input"
-              type="text"
-              placeholder="First Name"
-              name="first_name"
-              value={formik.values.first_name}
+          <div>{error}</div>
+          <div className="flex gap-3 w-full">
+            <div className="w-full">
+              <div className="mb-2 block">
+                <Label htmlFor="email2" value="First Name" />
+              </div>
+              <TextInput
+                id="first_name"
+                type="name"
+                placeholder="First name"
+                required={true}
+                shadow={true}
+                name="first_name"
+                value={formik.values.first_name}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+            </div>
+            <div className="w-full">
+              <div className="mb-2 block">
+                <Label htmlFor="email2" value="Last Name" />
+              </div>
+              <TextInput
+                id="last_name"
+                type="text"
+                placeholder="Lastname"
+                required={true}
+                shadow={true}
+                name="last_name"
+                value={formik.values.last_name}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+            </div>
+          </div>
+          <div>
+            <div className="mb-2 block">
+              <Label htmlFor="email2" value="Your email" />
+            </div>
+            <TextInput
+              type="email"
+              placeholder="name@flowbite.com"
+              required={true}
+              shadow={true}
+              id="email"
+              value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
           </div>
-          <div className="lastname">
-            <label className="form__label">Last Name</label>
-            <input
+          <div>
+            <div className="mb-2 block">
+              <Label htmlFor="username" value="Username" />
+            </div>
+            <TextInput
               type="text"
-              className="form__input"
-              placeholder="lastname"
-              name="last_name"
-              value={formik.values.last_name}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-          </div>
-          <div className="lastname">
-            <label className="form__label">username</label>
-            <input
-              type="text"
+              required={true}
+              shadow={true}
               name="username"
               id="username"
-              className="form__input"
               placeholder="username"
               value={formik.values.username}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
           </div>
-          <div className="email">
-            <label className="form__label">Email </label>
-            <input
-              type="email"
-              id="email"
-              className="form__input"
-              placeholder="Email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-          </div>
-          <div className="password">
-            <label className="form__label">Password </label>
-            <input
-              className="form__input"
-              type="password"
+          <div>
+            <div className="mb-2 block">
+              <Label htmlFor="password" value="Password" />
+            </div>
+            <TextInput
               id="password"
-              placeholder="Password"
+              type="password"
+              required={true}
+              shadow={true}
+              name="password"
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
           </div>
-        </div>
-        <div className="footer">
-          <button type="submit" className="btn">
-            Register
-          </button>
-        </div>
+          <div className="flex items-center gap-2">
+            <Checkbox id="agree" />
+            <Label htmlFor="agree">
+              I agree with the
+              <a
+                href="/forms"
+                className="text-blue-600 hover:underline dark:text-blue-500 ml-1"
+              >
+                terms and conditions
+              </a>
+            </Label>
+          </div>
+          <Button type="submit">Register new account</Button>
+        </form>
       </div>
-    </form>
+    </>
   );
 };
 export default Account;

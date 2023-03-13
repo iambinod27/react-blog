@@ -1,3 +1,4 @@
+import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -16,50 +17,59 @@ const Login = () => {
 
     onSubmit: (values) => {
       dispatch(login(values));
+      console.log(values);
     },
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <div>
-        <h4>Log In</h4>
+    <div className="h-[450px] w-96 mx-auto">
+      <form
+        className="flex flex-col gap-4 h-full justify-center"
+        onSubmit={formik.handleSubmit}
+      >
+        <h4 className="text-3xl font-medium capitalize">Log In</h4>
 
         <div>{isLoading ? error : message}</div>
-        <div className="form-body">
-          <div className="lastname">
-            <label className="form__label">username</label>
-            <input
-              type="text"
-              name="username"
-              id="username"
-              className="form__input"
-              placeholder="username"
-              value={formik.values.username}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
+        <div>
+          <div className="mb-2 block w-full">
+            <Label htmlFor="username" value="Username" />
           </div>
-
-          <div className="password">
-            <label className="form__label">Password </label>
-            <input
-              className="form__input"
-              type="password"
-              id="password"
-              placeholder="Password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
+          <TextInput
+            type="text"
+            required={true}
+            name="username"
+            id="username"
+            className="form__input"
+            placeholder="username"
+            value={formik.values.username}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+        </div>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="password1" value="Password" />
           </div>
+          <TextInput
+            type="password"
+            required={true}
+            id="password"
+            name="password"
+            placeholder="Password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
         </div>
-        <div className="footer">
-          <button type="submit" className="btn">
-            Login
-          </button>
+        <div className="flex items-center gap-2">
+          <Checkbox id="remember" />
+          <Label htmlFor="remember">Remember me</Label>
         </div>
-      </div>
-    </form>
+        <Button type="submit" color="dark">
+          Login
+        </Button>
+      </form>
+    </div>
   );
 };
 export default Login;
