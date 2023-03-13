@@ -11,7 +11,7 @@ const SidePost = () => {
             />
             <p className="text-[14px] font-light">users posted name</p>
           </div>
-          <h4 className="line-clamp-2">
+          <h4 className="line-clamp-2 font-medium">
             Hello mf title Hello mf title Hello mf title Hello mf title Hello mf
             title
           </h4>
