@@ -8,8 +8,8 @@ const blogaxios = axios.create({
 
 blogaxios.interceptors.response.use(
   (res) => {
-    if (res.data.access_token && res.data.refresh_token) {
-      setHttpOnlyCookies(res.data.access_token, res.data.refresh_token);
+    if (res.data.access_token && res.data.username) {
+      setHttpOnlyCookies(res.data.access_token, res.data.username);
     }
 
     return res;

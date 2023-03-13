@@ -1,10 +1,11 @@
 import { Avatar, Button, Dropdown, Navbar } from "flowbite-react";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import SearchInput from "./SearchInput";
 
 const Navbars = () => {
-  const { isAuthenticated, username } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
+  const username = getHttpOnlyCookies("username");
 
   return (
     <>
@@ -32,7 +33,9 @@ const Navbars = () => {
                   className="p-2"
                 >
                   <Dropdown.Header>
-                    <span className="block text-sm">Admin</span>
+                    <span className="block text-sm">
+                      {isAuthenticated && username}
+                    </span>
                     <span className="block truncate text-sm font-medium">
                       name@flowbite.com
                     </span>
