@@ -15,7 +15,6 @@ const postSlice = createSlice({
       state.isLoading = true;
     },
     [getAllposts.fulfilled]: (state, { payload }) => {
-      console.log(payload);
       state.isLoading = false;
       state.postItems = payload;
     },

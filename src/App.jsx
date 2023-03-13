@@ -3,11 +3,11 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import Layout from "./components/Layout";
 import Account from "./pages/Account";
-import { checkUser, getUser } from "./store/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { getHttpOnlyCookies } from "./utils/getHttpOnlyCookies";
 import Home from "./pages/Home";
 import { getAllposts } from "./store/actions/postActions";
+import Detail from "./pages/Detail";
 
 function App() {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -26,6 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="/post/:id" element={<Detail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Account />} />
         </Route>

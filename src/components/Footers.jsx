@@ -2,7 +2,7 @@ import { Footer } from "flowbite-react";
 
 export const Footers = () => {
   return (
-    <Footer container={true}>
+    <Footer container={true} className="shadow-none border-t">
       <Footer.Copyright href="#" by="Blogosphere™" year={2023} />
       <Footer.LinkGroup>
         <Footer.Link href="#">About</Footer.Link>

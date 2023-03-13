@@ -8,7 +8,7 @@ const Navbars = () => {
 
   return (
     <>
-      <Navbar fluid={true} className="bg-slate-200">
+      <Navbar fluid={true} className="bg-slate-200 border-b">
         <NavLink to="/">
           <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
             <h1>Blogoshpere.</h1>
