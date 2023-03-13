@@ -1,14 +1,17 @@
-import { Container } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import Navbar from "./Navbar";
+import { Footers } from "./Footers";
+import Navbars from "./Navbars";
 
 const Layout = () => {
   return (
     <>
-      <Navbar />
-      <Container>
+      <Navbars />
+
+      <div className="w-[80%] mx-auto">
         <Outlet />
-      </Container>
+      </div>
+
+      <Footers />
     </>
   );
 };

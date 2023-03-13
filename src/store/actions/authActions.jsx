@@ -54,3 +54,21 @@ export const getUser = createAsyncThunk("auth/getUser", async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+export const checkUser = createAsyncThunk("auth/valid", async () => {
+  try {
+    const response = await blogaxios.post(
+      "/api/v1/auth/token/valid",
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    );
+    const data = await response.data;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});

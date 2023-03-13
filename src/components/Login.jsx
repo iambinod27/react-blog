@@ -1,12 +1,4 @@
-import {
-  Alert,
-  Box,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -25,74 +17,59 @@ const Login = () => {
 
     onSubmit: (values) => {
       dispatch(login(values));
+      console.log(values);
     },
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <Box sx={{ width: "41%", m: "20px auto" }}>
-        <Typography variant="h4" sx={{ mb: 2 }}>
-          Log In
-        </Typography>
+    <div className="h-[450px] w-96 mx-auto">
+      <form
+        className="flex flex-col gap-4 h-full justify-center"
+        onSubmit={formik.handleSubmit}
+      >
+        <h4 className="text-3xl font-medium capitalize">Log In</h4>
 
-        <Box sx={{ pb: 2 }}>
-          <Alert
-            icon={false}
-            severity={`${error ? "error" : "success"}`}
-            sx={`${error || message ? "display : block" : "display : none"}`}
-          >
-            {isLoading ? error : message}
-          </Alert>
-        </Box>
-        <Box sx={{ pb: 2 }}>
-          <TextField
-            fullWidth
-            label="Username"
+        <div>{isLoading ? error : message}</div>
+        <div>
+          <div className="mb-2 block w-full">
+            <Label htmlFor="username" value="Username" />
+          </div>
+          <TextInput
             type="text"
+            required={true}
             name="username"
             id="username"
-            placeholder="Username"
+            className="form__input"
+            placeholder="username"
             value={formik.values.username}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-        </Box>
-
-        <Box sx={{ pb: 2 }}>
-          <TextField
-            label="Password"
+        </div>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="password1" value="Password" />
+          </div>
+          <TextInput
             type="password"
-            fullWidth
+            required={true}
             id="password"
+            name="password"
             placeholder="Password"
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-        </Box>
-        <FormControlLabel
-          control={<Checkbox />}
-          label="Remember password"
-          sx={{ pb: 2 }}
-        />
-        <Button
-          variant="contained"
-          sx={{ borderRadius: 0, mb: 2 }}
-          type="submit"
-          fullWidth
-        >
+        </div>
+        <div className="flex items-center gap-2">
+          <Checkbox id="remember" />
+          <Label htmlFor="remember">Remember me</Label>
+        </div>
+        <Button type="submit" color="dark">
           Login
         </Button>
-        <Box display={"flex"}>
-          <Link
-            to="/signup"
-            style={{ textDecoration: "none", color: "#3e3e3e" }}
-          >
-            Create an Account
-          </Link>
-        </Box>
-      </Box>
-    </form>
+      </form>
+    </div>
   );
 };
 export default Login;
