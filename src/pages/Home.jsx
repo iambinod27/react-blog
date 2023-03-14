@@ -10,12 +10,18 @@ const Home = () => {
     <>
       <div className=" mx-auto">
         <div className="grid grid-cols-12 ">
-          <div className="grid gap-10 col-span-7 ">
-            {/* {postItems < 1 ? (
+          <div className="grid gap-10 col-span-7 my-9 w-[90%] mx-auto">
+            {postItems < 1 ? (
               <>
-                <div className="w-full h-72 flex items-center">
+                <div className="w-full h-96 flex items-center justify-center">
                   <div className="text-center">
-                    <Spinner aria-label="Center-aligned spinner example" />
+                    <div className="flex flex-col gap-4 font-light">
+                      <Spinner
+                        aria-label="Center-aligned spinner example"
+                        size="xl"
+                      />
+                      Loading...
+                    </div>
                   </div>
                 </div>
               </>
@@ -25,8 +31,7 @@ const Home = () => {
                   return <Post item={item} key={item.id} />;
                 })}
               </>
-            )} */}
-            Hello
+            )}
           </div>
           <div className="cols-span-4">Other side</div>
         </div>

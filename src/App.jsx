@@ -8,19 +8,26 @@ import { getHttpOnlyCookies } from "./utils/getHttpOnlyCookies";
 import Home from "./pages/Home";
 import { getAllposts } from "./store/actions/postActions";
 import Detail from "./pages/Detail";
+import { checkUser } from "./store/actions/authActions";
 
 function App() {
   const { isAuthenticated } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const access_token = getHttpOnlyCookies("access_token");
+  const isAuth = getHttpOnlyCookies("isAuthenticated");
+
+  console.log(isAuth);
+
+  useEffect(() => {
+    if (isAuth) {
+      dispatch(checkUser());
+    }
+  }, [access_token]);
 
   useEffect(() => {
     dispatch(getAllposts());
   }, []);
 
-  useEffect(() => {
-    // dispatch(checkUser());
-  }, [access_token]);
   return (
     <div className="App">
       <Routes>
