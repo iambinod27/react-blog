@@ -67,6 +67,7 @@ export const checkUser = createAsyncThunk("auth/valid", async () => {
       }
     );
     const data = await response.data;
+    console.log(data);
     return data;
   } catch (error) {
     console.log(error);

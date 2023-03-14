@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import removeHttpOnlyCookies from "../../../utils/removeHttpOnlyCookies";
 import { checkUser, getUser, login, register } from "../../actions/authActions";
 
 const initialState = {
@@ -13,7 +14,13 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    onLogout(state) {
+      state.isAuthenticated = false;
+      state.isLoading = false;
+      removeHttpOnlyCookies();
+    },
+  },
   extraReducers: {
     [register.pending]: (state) => {
       state.isLoading = true;
@@ -49,10 +56,8 @@ const authSlice = createSlice({
       state.error = null;
     },
     [getUser.fulfilled]: (state, { payload }) => {
-      console.log(payload);
       state.isLoading = false;
       state.isAuthenticated = true;
-      state.username = payload.username;
     },
     [getUser.rejected]: (state, { payload }) => {
       state.isLoading = true;
@@ -77,5 +82,7 @@ const authSlice = createSlice({
     },
   },
 });
+
+export const { onLogout } = authSlice.actions;
 
 export default authSlice.reducer;

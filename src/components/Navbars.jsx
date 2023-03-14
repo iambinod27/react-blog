@@ -1,11 +1,15 @@
 import { Avatar, Button, Dropdown, Navbar } from "flowbite-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import { getHttpOnlyCookies } from "../utils/getHttpOnlyCookies";
+import { onLogout } from "../store/features/auth/authSlice";
 
 const Navbars = () => {
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const isAuth = getHttpOnlyCookies("isAuthenticated");
 
   const username = getHttpOnlyCookies("username");
+
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -18,24 +22,25 @@ const Navbars = () => {
 
         <div className="flex md:order-2">
           <div>
-            {isAuthenticated ? (
+            {isAuth ? (
               <>
                 <Dropdown
                   arrowIcon={false}
                   inline={true}
                   label={
-                    <Avatar
-                      img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                      rounded={true}
-                      className="w-11"
-                    />
+                    <>
+                      <Avatar
+                        img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                        className="w-11"
+                      />
+                      <span className="block text-base">
+                        {isAuth && username}
+                      </span>
+                    </>
                   }
                   className="p-2"
                 >
                   <Dropdown.Header>
-                    <span className="block text-sm">
-                      {isAuthenticated && username}
-                    </span>
                     <span className="block truncate text-sm font-medium">
                       name@flowbite.com
                     </span>
@@ -44,7 +49,9 @@ const Navbars = () => {
                   <Dropdown.Item>Settings</Dropdown.Item>
                   <Dropdown.Item>Earnings</Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item>Sign out</Dropdown.Item>
+                  <Dropdown.Item onClick={() => dispatch(onLogout())}>
+                    Sign out
+                  </Dropdown.Item>
                 </Dropdown>
               </>
             ) : (
