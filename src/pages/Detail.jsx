@@ -7,6 +7,8 @@ import { getPostDetail } from "../store/actions/postActions";
 import { removeSelectedPost } from "../store/features/post/postSlice";
 import dateConverter from "../utils/dateConverter";
 import Loading from "../components/Loading";
+import CommentList from "../components/commentList";
+import { fetchPostComment } from "../store/actions/commentsActions";
 
 const Detail = () => {
   const { id } = useParams();
@@ -19,8 +21,13 @@ const Detail = () => {
     };
   }, [dispatch, id]);
 
-  const { SelectedPost, isLoading } = useSelector((state) => state.post);
+  useEffect(() => {
+    dispatch(fetchPostComment(id));
+  }, [dispatch, id]);
 
+  const { SelectedPost, isLoading } = useSelector((state) => state.post);
+  const { comments } = useSelector((state) => state.comment);
+  console.log(comments);
   const date = dateConverter(SelectedPost.created_at);
   return (
     <>
@@ -42,9 +49,30 @@ const Detail = () => {
                     <div className="font-light">{date}</div>
                   </div>
                 </div>
-                <h1 className="text-3xl font-semibold">{SelectedPost.title}</h1>
+                <h1 className="text-3xl font-semibold my-5">
+                  {SelectedPost.title}
+                </h1>
                 <img src={SelectedPost.pic} alt={SelectedPost.title} />
                 <p>{SelectedPost.content}</p>
+                <div>
+                  <form></form>
+                  <div className="my-5">
+                    <h4 className="text-xl font-medium">Comments(5)</h4>
+                    {!isLoading ? (
+                      <>
+                        {comments.map((comment) => (
+                          <CommentList comment={comment} key={comment.id} />
+                        ))}
+                      </>
+                    ) : (
+                      <>
+                        <div>
+                          <h2 className="text-slate-500">No comments</h2>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
             <div className="col-span-4 w-[85%] mx-auto ">
