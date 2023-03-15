@@ -17,7 +17,6 @@ const Login = () => {
 
     onSubmit: (values) => {
       dispatch(login(values));
-      console.log(values);
     },
   });
 

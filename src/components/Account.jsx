@@ -26,10 +26,6 @@ const Account = () => {
     <>
       <div className="w-96 mx-auto my-20">
         <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
-          <h4 className="text-3xl font-medium">
-            Let's get your account set up
-          </h4>
-
           <div>{error}</div>
           <div className="flex gap-3 w-full">
             <div className="w-full">

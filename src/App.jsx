@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import Layout from "./components/Layout";
-import Account from "./pages/Account";
+import Account from "./components/Account";
 import { useDispatch, useSelector } from "react-redux";
 import { getHttpOnlyCookies } from "./utils/getHttpOnlyCookies";
 import Home from "./pages/Home";
@@ -15,8 +15,6 @@ function App() {
   const dispatch = useDispatch();
   const access_token = getHttpOnlyCookies("access_token");
   const isAuth = getHttpOnlyCookies("isAuthenticated");
-
-  console.log(isAuth);
 
   useEffect(() => {
     if (isAuth) {
