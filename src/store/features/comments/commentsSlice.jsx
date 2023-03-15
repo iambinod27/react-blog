@@ -3,7 +3,7 @@ import { fetchPostComment } from "../../actions/commentsActions";
 
 const initialState = {
   comments: [],
-  isLoading: true,
+  isComment: true,
 };
 
 const commentsSlice = createSlice({

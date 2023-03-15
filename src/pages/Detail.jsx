@@ -26,7 +26,7 @@ const Detail = () => {
   }, [dispatch, id]);
 
   const { SelectedPost, isLoading } = useSelector((state) => state.post);
-  const { comments } = useSelector((state) => state.comment);
+  const { comments, isComment } = useSelector((state) => state.comment);
   console.log(comments);
   const date = dateConverter(SelectedPost.created_at);
   return (
@@ -58,7 +58,7 @@ const Detail = () => {
                   <form></form>
                   <div className="my-5">
                     <h4 className="text-xl font-medium">Comments(5)</h4>
-                    {!isLoading ? (
+                    {isComment ? (
                       <>
                         {comments.map((comment) => (
                           <CommentList comment={comment} key={comment.id} />
