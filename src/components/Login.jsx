@@ -1,7 +1,7 @@
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import * as Yup from "yup";
 import { login } from "../store/actions/authActions";
 
 const Login = () => {
@@ -14,6 +14,13 @@ const Login = () => {
       username: "",
       password: "",
     },
+
+    validationSchema: Yup.object({
+      username: Yup.string()
+        .max(20, "username Must be 20 characters or less.")
+        .required("Username is required."),
+      password: Yup.string().required("Password Field is Required"),
+    }),
 
     onSubmit: (values) => {
       dispatch(login(values));
@@ -31,7 +38,19 @@ const Login = () => {
         <div>{isLoading ? error : message}</div>
         <div>
           <div className="mb-2 block w-full">
-            <Label htmlFor="username" value="Username" />
+            <Label
+              htmlFor="username"
+              value={
+                formik.touched.username && formik.errors.username
+                  ? formik.errors.username
+                  : "Username"
+              }
+              className={`${
+                formik.touched.username && formik.errors.username
+                  ? "text-red-700"
+                  : "text-black"
+              }`}
+            />
           </div>
           <TextInput
             type="text"
@@ -47,7 +66,19 @@ const Login = () => {
         </div>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="password1" value="Password" />
+            <Label
+              htmlFor="password1"
+              value={
+                formik.touched.password && formik.errors.password
+                  ? formik.errors.password
+                  : "Password"
+              }
+              className={`${
+                formik.touched.password && formik.errors.password
+                  ? "text-red-700"
+                  : "text-black"
+              }`}
+            />
           </div>
           <TextInput
             type="password"
