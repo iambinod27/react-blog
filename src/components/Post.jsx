@@ -1,4 +1,7 @@
 import { Card } from "flowbite-react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { getPostDetail } from "../store/actions/postActions";
 import dateConverter from "../utils/dateConverter";
 
 const Post = ({ item }) => {
@@ -15,9 +18,11 @@ const Post = ({ item }) => {
           />
           <p className="text-[14px] font-light">users posted name</p>
         </div>
-        <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-2">
-          {item.title}
-        </h5>
+        <Link to={`/post/${item.id}`}>
+          <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-2">
+            {item.title}
+          </h5>
+        </Link>
 
         <div>
           <p className="font-normal text-gray-700 dark:text-gray-400 line-clamp-2">
