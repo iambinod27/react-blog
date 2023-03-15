@@ -21,3 +21,16 @@ export const getAllposts = createAsyncThunk(
     }
   }
 );
+
+export const getPostDetail = createAsyncThunk(
+  "api/getPostDetails",
+  async (payload, thunkAPI) => {
+    try {
+      const response = await blogaxios.get(`/api/v1/post/${payload}`);
+      const data = await response.data;
+      return data;
+    } catch (error) {
+      thunkAPI.rejectWithValue("Post not found");
+    }
+  }
+);

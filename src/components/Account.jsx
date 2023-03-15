@@ -2,6 +2,7 @@ import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../store/actions/authActions";
+import * as Yup from "yup";
 
 const Account = () => {
   const { error } = useSelector((state) => state.auth);
@@ -17,6 +18,18 @@ const Account = () => {
       password: "",
     },
 
+    validationSchema: Yup.object({
+      first_name: Yup.string().required("First name is required"),
+      last_name: Yup.string().required("Last name is required"),
+      username: Yup.string()
+        .max(20, "Username must be 20 characters or less.")
+        .required("Username is required."),
+      email: Yup.string()
+        .email("Invalid email Address.")
+        .required("Email Is required."),
+      password: Yup.string().required("Password is Required."),
+    }),
+
     onSubmit: (values) => {
       dispatch(register(values));
     },
@@ -26,15 +39,23 @@ const Account = () => {
     <>
       <div className="w-96 mx-auto my-20">
         <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
-          <h4 className="text-3xl font-medium">
-            Let's get your account set up
-          </h4>
-
           <div>{error}</div>
           <div className="flex gap-3 w-full">
             <div className="w-full">
               <div className="mb-2 block">
-                <Label htmlFor="email2" value="First Name" />
+                <Label
+                  htmlFor="email2"
+                  value={
+                    formik.touched.first_name && formik.errors.first_name
+                      ? formik.errors.first_name
+                      : "First name"
+                  }
+                  className={`${
+                    formik.touched.first_name && formik.errors.first_name
+                      ? "text-red-700"
+                      : "text-black"
+                  }`}
+                />
               </div>
               <TextInput
                 id="first_name"
@@ -50,7 +71,19 @@ const Account = () => {
             </div>
             <div className="w-full">
               <div className="mb-2 block">
-                <Label htmlFor="email2" value="Last Name" />
+                <Label
+                  htmlFor="email2"
+                  value={
+                    formik.touched.last_name && formik.errors.last_name
+                      ? formik.errors.last_name
+                      : "Last name"
+                  }
+                  className={`${
+                    formik.touched.last_name && formik.errors.last_name
+                      ? "text-red-700"
+                      : "text-black"
+                  }`}
+                />
               </div>
               <TextInput
                 id="last_name"
@@ -67,7 +100,19 @@ const Account = () => {
           </div>
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="email2" value="Your email" />
+              <Label
+                htmlFor="email2"
+                value={
+                  formik.touched.email && formik.errors.email
+                    ? formik.errors.email
+                    : "Your email"
+                }
+                className={`${
+                  formik.touched.email && formik.errors.email
+                    ? "text-red-700"
+                    : "text-black"
+                }`}
+              />
             </div>
             <TextInput
               type="email"
@@ -82,7 +127,19 @@ const Account = () => {
           </div>
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="username" value="Username" />
+              <Label
+                htmlFor="username"
+                value={
+                  formik.touched.username && formik.errors.username
+                    ? formik.errors.username
+                    : "Username"
+                }
+                className={`${
+                  formik.touched.username && formik.errors.username
+                    ? "text-red-700"
+                    : "text-black"
+                }`}
+              />
             </div>
             <TextInput
               type="text"
@@ -98,7 +155,19 @@ const Account = () => {
           </div>
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="password" value="Password" />
+              <Label
+                htmlFor="password"
+                value={
+                  formik.touched.password && formik.errors.password
+                    ? formik.errors.password
+                    : "Password"
+                }
+                className={`${
+                  formik.touched.password && formik.errors.password
+                    ? "text-red-700"
+                    : "text-black"
+                }`}
+              />
             </div>
             <TextInput
               id="password"
