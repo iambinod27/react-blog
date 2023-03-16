@@ -22,7 +22,7 @@ export const createPostComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await blogaxios.post(
-        `/api/v1/post/${payload.id}/comments`,
+        `/api/v1/post/${payload.id}/comment`,
         payload,
         {
           headers: {

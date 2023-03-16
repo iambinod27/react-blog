@@ -1,14 +1,23 @@
 import { Textarea } from "flowbite-react";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { createPostComment } from "../store/actions/commentsActions";
 
 const PostComment = () => {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
   const formik = useFormik({
     initialValues: {
       content: "",
+      rating: 1,
     },
 
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: (values, { resetForm }) => {
+      console.log({ id: 1, ...formik.values });
+      dispatch(createPostComment({ id: id, ...values }));
+      resetForm();
     },
   });
 
@@ -16,7 +25,7 @@ const PostComment = () => {
     if (event.key === "Enter") {
       event.preventDefault();
       event.stopPropagation();
-      console.log(formik.values);
+      formik.handleSubmit();
     }
   };
 

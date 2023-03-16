@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchPostComment } from "../../actions/commentsActions";
+import {
+  createPostComment,
+  fetchPostComment,
+} from "../../actions/commentsActions";
 
 const initialState = {
   comments: [],
@@ -19,6 +22,15 @@ const commentsSlice = createSlice({
       state.comments = payload;
     },
     [fetchPostComment.rejected]: (state) => {
+      state.isComment = true;
+    },
+    [createPostComment.pending]: (state) => {
+      state.isComment = true;
+    },
+    [createPostComment.fulfilled]: (state, { payload }) => {
+      state.isComment = false;
+    },
+    [createPostComment.rejected]: (state) => {
       state.isComment = true;
     },
   },
