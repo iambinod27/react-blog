@@ -1,10 +1,21 @@
-import { Avatar, Button, Dropdown, Modal, Navbar } from "flowbite-react";
+import {
+  Avatar,
+  Button,
+  Dropdown,
+  FileInput,
+  Label,
+  Modal,
+  Navbar,
+  Textarea,
+  TextInput,
+} from "flowbite-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { getHttpOnlyCookies } from "../utils/getHttpOnlyCookies";
 import { onLogout } from "../store/features/auth/authSlice";
 import { BiEditAlt } from "react-icons/bi";
 import { useState } from "react";
+import { useFormik } from "formik";
 
 const Navbars = () => {
   const isAuth = getHttpOnlyCookies("isAuthenticated");
@@ -17,6 +28,18 @@ const Navbars = () => {
 
   const onClick = () => setShow(true);
   const onClose = () => setShow(false);
+
+  const formik = useFormik({
+    initialValues: {
+      title: "",
+      content: "",
+      image: null,
+    },
+
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
   return (
     <>
       <Navbar fluid={true} className="bg-slate-200 border-b">
@@ -35,31 +58,73 @@ const Navbars = () => {
                     Write Post <BiEditAlt />
                   </Button>
                   <Modal show={show} onClose={onClose}>
-                    <Modal.Header>Terms of Service</Modal.Header>
-                    <Modal.Body>
-                      <div className="space-y-6">
-                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                          With less than a month to go before the European Union
-                          enacts new consumer privacy laws for its citizens,
-                          companies around the world are updating their terms of
-                          service agreements to comply.
-                        </p>
-                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                          The European Union’s General Data Protection
-                          Regulation (G.D.P.R.) goes into effect on May 25 and
-                          is meant to ensure a common set of data rights in the
-                          European Union. It requires organizations to notify
-                          users as soon as possible of high-risk data breaches
-                          that could personally affect them.
-                        </p>
-                      </div>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button onClick={onClick}>I accept</Button>
-                      <Button color="gray" onClick={onClick}>
-                        Decline
-                      </Button>
-                    </Modal.Footer>
+                    <form onSubmit={formik.handleSubmit}>
+                      <Modal.Header>
+                        <div className="flex items-center gap-2">
+                          Write Post <BiEditAlt />
+                        </div>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <div className="mb-2">
+                          <div className="mb-2 block w-full">
+                            <Label htmlFor="username" value="Title" />
+                          </div>
+                          <TextInput
+                            type="text"
+                            className="border-none"
+                            placeholder="Eg: Hello world"
+                            required={true}
+                            name="title"
+                            value={formik.values.title}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                          />
+                        </div>
+                        <div className="mb-2">
+                          <div className="mb-2 block w-full">
+                            <Label htmlFor="username" value="Image" />
+                          </div>
+                          <FileInput
+                            type="file"
+                            required={true}
+                            className="border-none"
+                            name="image"
+                            value={formik.values.image}
+                            onChange={(event) => {
+                              formik.setFieldValue(
+                                "file",
+                                event.target.files[0]
+                              );
+                            }}
+                            onBlur={formik.handleBlur}
+                          />
+                        </div>
+                        <div className="mb-2">
+                          <div className="mb-2 block">
+                            <Label htmlFor="comment" value="Content" />
+                          </div>
+                          <Textarea
+                            id="Content"
+                            placeholder="Eg: Hoy es fiesta dia de Shuvam"
+                            required={true}
+                            rows={4}
+                            className="resize-none"
+                            name="content"
+                            value={formik.values.content}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                          />
+                        </div>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button onClick={onClick} type="submit">
+                          Post
+                        </Button>
+                        <Button color="gray" onClick={onClose}>
+                          Cancel
+                        </Button>
+                      </Modal.Footer>
+                    </form>
                   </Modal>
                   <Dropdown
                     arrowIcon={false}
