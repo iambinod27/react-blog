@@ -9,6 +9,7 @@ import dateConverter from "../utils/dateConverter";
 import Loading from "../components/Loading";
 import CommentList from "../components/commentList";
 import { fetchPostComment } from "../store/actions/commentsActions";
+import PostComment from "../components/PostComment";
 
 const Detail = () => {
   const { id } = useParams();
@@ -58,6 +59,9 @@ const Detail = () => {
                   <form></form>
                   <div className="my-5">
                     <h4 className="text-xl font-medium">Comments(5)</h4>
+                    <div className="my-4">
+                      <PostComment />
+                    </div>
                     {isComment ? (
                       <>
                         <Loading />
