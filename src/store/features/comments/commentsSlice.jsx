@@ -12,14 +12,14 @@ const commentsSlice = createSlice({
   reducers: {},
   extraReducers: {
     [fetchPostComment.pending]: (state) => {
-      state.isLoading = true;
+      state.isComment = true;
     },
     [fetchPostComment.fulfilled]: (state, { payload }) => {
-      state.isLoading = false;
+      state.isComment = false;
       state.comments = payload;
     },
     [fetchPostComment.rejected]: (state) => {
-      state.isLoading = true;
+      state.isComment = true;
     },
   },
 });

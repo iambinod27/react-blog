@@ -60,15 +60,23 @@ const Detail = () => {
                     <h4 className="text-xl font-medium">Comments(5)</h4>
                     {isComment ? (
                       <>
-                        {comments.map((comment) => (
-                          <CommentList comment={comment} key={comment.id} />
-                        ))}
+                        <Loading />
                       </>
                     ) : (
                       <>
-                        <div>
-                          <h2 className="text-slate-500">No comments</h2>
-                        </div>
+                        {comments.length < 1 ? (
+                          <>
+                            <div>
+                              <h2 className="text-slate-500">No comments</h2>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            {comments.map((comment) => (
+                              <CommentList comment={comment} key={comment.id} />
+                            ))}
+                          </>
+                        )}
                       </>
                     )}
                   </div>
