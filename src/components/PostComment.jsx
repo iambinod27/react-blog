@@ -2,7 +2,10 @@ import { Textarea } from "flowbite-react";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { createPostComment } from "../store/actions/commentsActions";
+import {
+  createPostComment,
+  fetchPostComment,
+} from "../store/actions/commentsActions";
 
 const PostComment = () => {
   const dispatch = useDispatch();
@@ -18,6 +21,7 @@ const PostComment = () => {
       console.log({ id: 1, ...formik.values });
       dispatch(createPostComment({ id: id, ...values }));
       resetForm();
+      dispatch(fetchPostComment(id));
     },
   });
 

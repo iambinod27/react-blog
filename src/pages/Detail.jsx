@@ -61,7 +61,7 @@ const Detail = () => {
                     <div className="my-4">
                       <PostComment />
                     </div>
-                    {isComment || comments === "" ? (
+                    {/* {isComment || comments === "" ? (
                       <>
                         <Loading />
                       </>
@@ -82,6 +82,15 @@ const Detail = () => {
                             ))}
                           </>
                         )}
+                      </>
+                    )} */}
+                    {isComment ? (
+                      <Loading />
+                    ) : (
+                      <>
+                        {comments.map((comment) => (
+                          <CommentList comment={comment} key={comment.id} />
+                        ))}
                       </>
                     )}
                   </div>
