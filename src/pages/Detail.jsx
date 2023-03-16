@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import SidePost from "../components/sidePost";
 import { getPostDetail } from "../store/actions/postActions";
-import { removeSelectedPost } from "../store/features/post/postSlice";
 import dateConverter from "../utils/dateConverter";
 import Loading from "../components/Loading";
 import CommentList from "../components/commentList";
 import { fetchPostComment } from "../store/actions/commentsActions";
+import PostComment from "../components/PostComment";
 
 const Detail = () => {
   const { id } = useParams();
@@ -16,16 +16,14 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(getPostDetail(id));
-    return () => {
-      dispatch(removeSelectedPost());
-    };
-  }, [dispatch, id]);
-
-  useEffect(() => {
-    dispatch(fetchPostComment(id));
   }, [dispatch, id]);
 
   const { SelectedPost, isLoading } = useSelector((state) => state.post);
+
+  useEffect(() => {
+    dispatch(fetchPostComment(id));
+  }, [id]);
+
   const { comments, isComment } = useSelector((state) => state.comment);
   console.log(comments);
   const date = dateConverter(SelectedPost.created_at);
@@ -57,18 +55,42 @@ const Detail = () => {
                 <div>
                   <form></form>
                   <div className="my-5">
-                    <h4 className="text-xl font-medium">Comments(5)</h4>
+                    <h4 className="text-xl font-medium">
+                      Comments ({comments.length})
+                    </h4>
+                    <div className="my-4">
+                      <PostComment />
+                    </div>
+                    {/* {isComment || comments === "" ? (
+                      <>
+                        <Loading />
+                      </>
+                    ) : (
+                      <>
+                        {comments.length < 1 ? (
+                          <>
+                            <div>
+                              <h2 className="text-slate-500">No comments</h2>
+                            </div>
+                          </>
+                        ) : isComment ? (
+                          <Loading />
+                        ) : (
+                          <>
+                            {comments.map((comment) => (
+                              <CommentList comment={comment} key={comment.id} />
+                            ))}
+                          </>
+                        )}
+                      </>
+                    )} */}
                     {isComment ? (
+                      <Loading />
+                    ) : (
                       <>
                         {comments.map((comment) => (
                           <CommentList comment={comment} key={comment.id} />
                         ))}
-                      </>
-                    ) : (
-                      <>
-                        <div>
-                          <h2 className="text-slate-500">No comments</h2>
-                        </div>
                       </>
                     )}
                   </div>

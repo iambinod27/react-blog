@@ -20,7 +20,7 @@ function App() {
     if (isAuth) {
       dispatch(checkUser());
     }
-  }, [access_token]);
+  }, [dispatch, access_token]);
 
   useEffect(() => {
     dispatch(getAllposts());
