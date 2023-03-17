@@ -3,7 +3,7 @@ import axios from "axios";
 import { setHttpOnlyCookies } from "../utils/setHttpOnlyCookies";
 
 const blogaxios = axios.create({
-  baseURL: "http://52.87.23.252:8000",
+  baseURL: "http://34.203.201.195:8000",
 });
 
 blogaxios.interceptors.response.use(
