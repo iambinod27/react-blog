@@ -25,7 +25,6 @@ const Detail = () => {
   }, [id]);
 
   const { comments, isComment } = useSelector((state) => state.comment);
-  console.log(comments);
   const date = dateConverter(SelectedPost.created_at);
   return (
     <>
@@ -61,7 +60,7 @@ const Detail = () => {
                     <div className="my-4">
                       <PostComment />
                     </div>
-                    {/* {isComment || comments === "" ? (
+                    {isComment ? (
                       <>
                         <Loading />
                       </>
@@ -75,6 +74,8 @@ const Detail = () => {
                           </>
                         ) : isComment ? (
                           <Loading />
+                        ) : comments == [] ? (
+                          <Loading />
                         ) : (
                           <>
                             {comments.map((comment) => (
@@ -82,15 +83,6 @@ const Detail = () => {
                             ))}
                           </>
                         )}
-                      </>
-                    )} */}
-                    {isComment ? (
-                      <Loading />
-                    ) : (
-                      <>
-                        {comments.map((comment) => (
-                          <CommentList comment={comment} key={comment.id} />
-                        ))}
                       </>
                     )}
                   </div>
