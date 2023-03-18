@@ -6,10 +6,12 @@ import {
   createPostComment,
   fetchPostComment,
 } from "../store/actions/commentsActions";
+import { getHttpOnlyCookies } from "../utils/getHttpOnlyCookies";
 
 const PostComment = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const isAuth = getHttpOnlyCookies("access_token");
 
   const formik = useFormik({
     initialValues: {
@@ -19,9 +21,11 @@ const PostComment = () => {
 
     onSubmit: (values, { resetForm }) => {
       console.log({ id: 1, ...formik.values });
-      dispatch(createPostComment({ id: id, ...values }));
+      if (isAuth) {
+        dispatch(createPostComment({ id: id, ...values }));
+        dispatch(fetchPostComment(id));
+      }
       resetForm();
-      dispatch(fetchPostComment(id));
     },
   });
 
