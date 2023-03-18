@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import { getAllposts } from "./store/actions/postActions";
 import Detail from "./pages/Detail";
 import { checkUser } from "./store/actions/authActions";
+import Profile from "./pages/Profile";
 
 function App() {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -32,6 +33,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/post/:id" element={<Detail />} />
+          <Route path="/user/:id" element={<Profile />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Account />} />
         </Route>
