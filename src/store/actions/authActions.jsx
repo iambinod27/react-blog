@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { Navigate } from "react-router-dom";
 import blogaxios from "../../axios/axios";
 import { getHttpOnlyCookies } from "../../utils/getHttpOnlyCookies";
 
@@ -33,6 +34,7 @@ export const login = createAsyncThunk(
         },
       });
       const data = await response.data;
+      Navigate("/");
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
