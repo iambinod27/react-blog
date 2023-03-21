@@ -193,6 +193,15 @@ const Account = () => {
             </Label>
           </div>
           <Button type="submit">Register new account</Button>
+          <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
+            Not registered?
+            <a
+              href="/modal"
+              className="text-blue-700 hover:underline dark:text-blue-500"
+            >
+              Create account
+            </a>
+          </div>
         </form>
       </div>
     </>
